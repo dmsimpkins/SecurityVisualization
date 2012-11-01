@@ -1,0 +1,34 @@
+h1 {
+	text-align: center;
+}
+
+p {
+	text-align: center;
+}
+
+svg {
+	display: block;
+	margin: auto;
+}
+
+rect {
+	stroke: black;
+}
+
+.details {
+	font: 16px sans-serif;
+}
+
+.background {
+	fill: #dfe3ec;
+	stroke: white;
+}
+
+.ageleft {
+	fill: white;
+}
+
+.slider {
+	fill: #505050;
+	stroke: none;
+}
