@@ -43,17 +43,34 @@ window.toggleView = ->
   d3.selectAll('text').remove()
   draw()
   
+window.scrollUp50 = ->
+  first -= count * 50
+  if first < 0
+    first = 0
+  if first == 0
+    $('#pageup').attr('disabled', 'disabled')
+    $('#pageup50').attr('disabled', 'disabled')
+  draw()
+
 window.scrollUp = ->
   first -= count
   if first < 0
     first = 0
   if first == 0
     $('#pageup').attr('disabled', 'disabled')
+    $('#pageup50').attr('disabled', 'disabled')
   draw()
 
 window.scrollDown = ->
   first += count
   $('#pageup').removeAttr('disabled')
+  $('#pageup50').removeAttr('disabled')
+  draw()
+
+window.scrollDown50 = ->
+  first += count * 50
+  $('#pageup').removeAttr('disabled')
+  $('#pageup50').removeAttr('disabled')
   draw()
 
 #list = d3.select('svg')
@@ -62,13 +79,13 @@ window.scrollDown = ->
 
 draw = ->
   if toggle == 0
-    list = d3.select('svg')
-    .attr('width', w)
-    .attr('height', h * count)
     viewheight = 460
     if window.innerHeight #Based on code from http://www.javascripter.net/faq/b$
       viewheight = window.innerHeight
     count = Math.floor( viewheight / ( h + 2 * slidermargin )) - 1
+    list = d3.select('svg')
+    .attr('width', w)
+    .attr('height', h * count)
     d3.json('query_alerts.php?first=' + first + '&count=' + count, (data) ->
       data = data.items
 
@@ -200,13 +217,13 @@ draw = ->
       list.selectAll('')
     )
   else
-    list = d3.select('svg')
-    .attr('width', thinw)
-    .attr('height', thinh * count)
     viewheight = 460
     if window.innerHeight #Based on code from http://www.javascripter.net/faq/b$
       viewheight = window.innerHeight
     count = Math.floor( viewheight / ( thinh + 2 * thinslidermargin )) - 1
+    list = d3.select('svg')
+    .attr('width', thinw)
+    .attr('height', thinh * count)
     d3.json('query_alerts.php?first=' + first + '&count=' + count, (data) ->
       data = data.items
 
@@ -365,4 +382,3 @@ window.highlightDestination = (ip) ->
   )
 
 draw()
-
