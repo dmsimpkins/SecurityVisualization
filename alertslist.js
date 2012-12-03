@@ -8,7 +8,7 @@ Final Project Daniel Simpkins and Nate Phillips
 
 
 (function() {
-  var agewidth, colorMap, count, draw, first, h, ipmargin, margin, slidermargin, sliderwidth, thinagewidth, thinh, thinipmargin, thinmargin, thinslidermargin, thinsliderwidth, thinw, toggle, viewheight, w;
+  var agewidth, colorMap, count, draw, first, h, ipmargin, margin, slidermargin, sliderwidth, thinagewidth, thinh, thinipmargin, thinmargin, thinslidermargin, thinsliderwidth, thinw, toggle, viewheight, w, _asc, _sortBy;
 
   h = 50;
 
@@ -17,6 +17,10 @@ Final Project Daniel Simpkins and Nate Phillips
   margin = 15;
 
   toggle = 0;
+
+  _sortBy = 'AGE';
+
+  _asc = 'ASC';
 
   agewidth = 50;
 
@@ -52,10 +56,28 @@ Final Project Daniel Simpkins and Nate Phillips
 
   colorMap = ['#2e99c4', '#9fc2e2', '#fdf9cd', '#fc93ba', '#d62028'];
 
+  window.sort = function() {
+    _asc = $("input:radio[name='sortOrder']:checked").val();
+    _sortBy = $("input:radio[name='sortByDrop']:checked").val();
+    return draw();
+  };
+
   window.toggleView = function() {
     toggle = -toggle + 1;
     d3.selectAll('rect').remove();
     d3.selectAll('text').remove();
+    return draw();
+  };
+
+  window.scrollUp50 = function() {
+    first -= count * 50;
+    if (first < 0) {
+      first = 0;
+    }
+    if (first === 0) {
+      $('#pageup').attr('disabled', 'disabled');
+      $('#pageup50').attr('disabled', 'disabled');
+    }
     return draw();
   };
 
@@ -66,6 +88,7 @@ Final Project Daniel Simpkins and Nate Phillips
     }
     if (first === 0) {
       $('#pageup').attr('disabled', 'disabled');
+      $('#pageup50').attr('disabled', 'disabled');
     }
     return draw();
   };
@@ -73,19 +96,27 @@ Final Project Daniel Simpkins and Nate Phillips
   window.scrollDown = function() {
     first += count;
     $('#pageup').removeAttr('disabled');
+    $('#pageup50').removeAttr('disabled');
+    return draw();
+  };
+
+  window.scrollDown50 = function() {
+    first += count * 50;
+    $('#pageup').removeAttr('disabled');
+    $('#pageup50').removeAttr('disabled');
     return draw();
   };
 
   draw = function() {
     var list;
     if (toggle === 0) {
-      list = d3.select('svg').attr('width', w).attr('height', h * count);
       viewheight = 460;
       if (window.innerHeight) {
         viewheight = window.innerHeight;
       }
       count = Math.floor(viewheight / (h + 2 * slidermargin)) - 1;
-      d3.json('query_alerts.php?first=' + first + '&count=' + count, function(data) {
+      list = d3.select('svg').attr('width', w).attr('height', h * count);
+      return d3.json('query_alerts.php?first=' + first + '&count=' + count + '&asc=' + _asc + '&sortBy=' + _sortBy, function(data) {
         var a, b, d, s;
         data = data.items;
         b = list.selectAll('.background').data(data, function(d) {
@@ -201,23 +232,14 @@ Final Project Daniel Simpkins and Nate Phillips
         });
         return d.exit().remove();
       });
-      return d3.json("query_histogram", function(json) {
-        var barCount, barHeight, barLength, data, totalHeight;
-        data = json.items;
-        barCount = data.length;
-        totalHeight = height * count;
-        barHeight = totalHeight / barCount;
-        barLength = 200;
-        return list.selectAll('');
-      });
     } else {
-      list = d3.select('svg').attr('width', thinw).attr('height', thinh * count);
       viewheight = 460;
       if (window.innerHeight) {
         viewheight = window.innerHeight;
       }
       count = Math.floor(viewheight / (thinh + 2 * thinslidermargin)) - 1;
-      d3.json('query_alerts.php?first=' + first + '&count=' + count, function(data) {
+      list = d3.select('svg').attr('width', thinw).attr('height', thinh * count);
+      return d3.json('query_alerts.php?first=' + first + '&count=' + count + '&asc=' + _asc + '&sortBy=' + _sortBy, function(data) {
         var a, b, d, s;
         data = data.items;
         b = list.selectAll('.background').data(data, function(d) {
@@ -327,15 +349,6 @@ Final Project Daniel Simpkins and Nate Phillips
           return d.alert_id;
         });
         return d.exit().remove();
-      });
-      return d3.json("query_histogram", function(json) {
-        var barCount, barHeight, barLength, data, totalHeight;
-        data = json.items;
-        barCount = data.length;
-        totalHeight = height * count;
-        barHeight = totalHeight / barCount;
-        barLength = 200;
-        return list.selectAll('');
       });
     }
   };

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <head>
     <title>Alerts</title>
 	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
@@ -18,17 +19,16 @@
 	</p>
 	<div id='leftFloater'>
 		<div id='sortBy'>
-			Sort by:
-		   <form action=''>
-		   	<select name = 'sortByDrop'>
-		   		<option value="time">Time</option>
-		   		<option value='srcip'>Src IP</option>
-		   		<option value='dstip'>Dst IP</option>
-		   		<option value='priority'>Priority</option>
-		   	</select><br>
-		   	<input type='radio' name='sortOrder' value='ascending' checked='checked'> Ascending<br>
-		   	<input type='radio' name='sortOrder' value='descending'> Descending
-		   </form>
+			<h3>Sort by: </h3>
+		   	<input type = 'radio' name = 'sortByDrop' value='AGE' checked='checked'> Age <br>
+		   	<input type = 'radio' name = 'sortByDrop' value='SRC_IP'> Src IP <br>
+		   	<input type = 'radio' name = 'sortByDrop' value='DST_IP'> Dst IP <br>
+		   	<input type = 'radio' name = 'sortByDrop' value='PRIORITY'> Priority <br>
+		   	<h3>Order: </h3>
+		   	<input type='radio' name='sortOrder' value='ASC' checked='checked'> Ascending<br>
+		   	<input type='radio' name='sortOrder' value='DESC'> Descending <br>
+		   	<button id = 'sort' onclick='window.sort()'>Sort</button>
+		   
 		</div>
 		<button id="toggleview" onclick="window.toggleView()">Toggle View</button>
 	</div>

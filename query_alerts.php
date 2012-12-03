@@ -1,6 +1,5 @@
 
 <?php
-
 $con = mysql_connect('localhost','netflowuser');
 
 if (!$con)
@@ -24,11 +23,15 @@ else if ($_GET['alert_id'])
   }
 else
   {
+
 	$sql = 'SELECT * '
     . 'FROM `alerts` '
-    . 'ORDER BY `alerts`.`PRIORITY` ASC, `alerts`.`AGE` DESC '
+    #. 'ORDER BY `alerts`.`PRIORITY` ASC, `alerts`.`AGE` DESC '
+    . 'ORDER BY `alerts`' . '.`' . $_GET['sortBy'] . '` ' . $_GET['asc'] . ', `alerts`.`AGE` DESC '
     . 'LIMIT ' . $_GET['first'] . ' , ' . $_GET['count'];
+    #echo $sql;
   }
+  #die($sql);
 
 $result = mysql_query($sql);
 

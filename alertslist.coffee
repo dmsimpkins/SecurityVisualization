@@ -12,6 +12,8 @@ w = 400 #The width of the full alert
 margin = 15 #The margin for each of the elements within the full alert
 
 toggle = 0 #This swaps between the thin view and the normal view
+_sortBy = 'AGE'
+_asc = 'ASC'
 
 agewidth = 50 #The width of the age display
 sliderwidth = 3 #The thickness of the slider
@@ -36,6 +38,17 @@ thinslidermargin = 2
 thinipmargin = 3
 
 colorMap = ['#2e99c4', '#9fc2e2', '#fdf9cd', '#fc93ba', '#d62028']
+
+#$('#sortOrder').click ->
+#  asc = $('#sortOrder').val()
+
+#$('#sortByDrop').change ->
+#  sortBy = $('#sortByDrop').val()
+
+window.sort = ->
+  _asc = $("input:radio[name='sortOrder']:checked").val()
+  _sortBy = $("input:radio[name='sortByDrop']:checked").val()
+  draw()
 
 window.toggleView = ->
   toggle = -toggle + 1
@@ -86,7 +99,7 @@ draw = ->
     list = d3.select('svg')
     .attr('width', w)
     .attr('height', h * count)
-    d3.json('query_alerts.php?first=' + first + '&count=' + count, (data) ->
+    d3.json('query_alerts.php?first=' + first + '&count=' + count + '&asc=' + _asc + '&sortBy=' + _sortBy , (data) ->
       data = data.items
 
       b = list.selectAll('.background')
@@ -207,15 +220,15 @@ draw = ->
         .text((d) -> d.details)
       d.exit().remove()
     )
-    d3.json("query_histogram", (json) ->
-      data = json.items
-      barCount = data.length
-      totalHeight = height * count
-      barHeight = totalHeight / barCount
-      barLength = 200
+    #d3.json("histogram.json", (json) ->
+    #  data = json.items
+    #  barCount = data.length
+    #  totalHeight = height * count
+    #  barHeight = totalHeight / barCount
+    #  barLength = 200
 
-      list.selectAll('')
-    )
+    #  list.selectAll('')
+    #)
   else
     viewheight = 460
     if window.innerHeight #Based on code from http://www.javascripter.net/faq/b$
@@ -224,7 +237,7 @@ draw = ->
     list = d3.select('svg')
     .attr('width', thinw)
     .attr('height', thinh * count)
-    d3.json('query_alerts.php?first=' + first + '&count=' + count, (data) ->
+    d3.json('query_alerts.php?first=' + first + '&count=' + count + '&asc='+_asc + '&sortBy=' + _sortBy , (data) ->
       data = data.items
 
       b = list.selectAll('.background') #This controls the blue background
@@ -338,15 +351,15 @@ draw = ->
         .data(data, (d) -> d.alert_id)
       d.exit().remove()
     )
-    d3.json("query_histogram", (json) ->
-      data = json.items
-      barCount = data.length
-      totalHeight = height * count
-      barHeight = totalHeight / barCount
-      barLength = 200
+    #d3.json("histogram.json", (json) ->
+    #  data = json.items
+    #  barCount = data.length
+    #  totalHeight = height * count
+    #  barHeight = totalHeight / barCount
+    #  barLength = 200
 
-      list.selectAll('')
-    )
+    #  list.selectAll('')
+    #)
 
 
 window.highlightSource = (ip) ->
