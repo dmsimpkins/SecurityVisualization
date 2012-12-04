@@ -8,7 +8,7 @@ Final Project Daniel Simpkins and Nate Phillips
 
 
 (function() {
-  var agewidth, colorMap, count, draw, first, h, ipmargin, margin, slidermargin, sliderwidth, thinagewidth, thinh, thinipmargin, thinmargin, thinslidermargin, thinsliderwidth, thinw, toggle, viewheight, w, _asc, _sortBy;
+  var agewidth, colorMap, count, draw, first, h, ipmargin, margin, priorityColors, slidermargin, sliderwidth, thinagewidth, thinh, thinipmargin, thinmargin, thinslidermargin, thinsliderwidth, thinw, toggle, viewheight, w, _asc, _sortBy;
 
   h = 50;
 
@@ -55,6 +55,50 @@ Final Project Daniel Simpkins and Nate Phillips
   thinipmargin = 3;
 
   colorMap = ['#2e99c4', '#9fc2e2', '#fdf9cd', '#fc93ba', '#d62028'];
+
+  priorityColors = ['#32CD32', '#84E184', '#C2F0C2'];
+
+  window.setDetails = function(alert_id) {
+    return d3.json('query_alerts.php?alert_id=' + alert_id, function(json) {
+      return window.writeDetails(json.items[0]);
+    });
+  };
+
+  window.writeDetails = function(alert) {
+    var destination, extra, optional, source;
+    $('#detail').html(alert.details);
+    $('#priority').html('Priority: ' + alert.priority).css('background-color', priorityColors[alert.priority - 1]).css('width', '200px');
+    $('#datetime').html('Datetime: ' + alert.date_time);
+    source = alert.src_ip;
+    if (alert.src_port !== 0) {
+      source += ':' + alert.src_port;
+    }
+    source += ' (' + alert.src_ip_class + ')';
+    $('#source').html(source).css('background-color', colorMap[alert.src_ip_type]).css('width', '400px');
+    d3.text('query_alerts.php?ip=' + alert.src_ip, function(count) {
+      return $('#source_count').html('Number of alerts: ' + count);
+    });
+    destination = alert.dst_ip;
+    if (alert.dst_port !== 0) {
+      destination += ':' + alert.dst_port;
+    }
+    destination += ' (' + alert.dst_ip_class + ')';
+    $('#destination').html(destination).css('background-color', colorMap[alert.dst_ip_type]).css('width', '400px');
+    d3.text('query_alerts.php?ip=' + alert.dst_ip, function(count) {
+      return $('#destination_count').html('Number of alerts: ' + count);
+    });
+    extra = alert.protocol;
+    extra += ' TTL:' + alert.ttl;
+    extra += ' ID:' + alert.id;
+    extra += ' PacketSize:' + alert.dgmlen;
+    $('#extra').html(extra);
+    optional = '';
+    if (alert.protocol === 'TCP') {
+      optional += ' Flags:' + alert.flags;
+      optional += ' Seq:' + alert.seq;
+      return $('#optional').html(optional);
+    }
+  };
 
   window.sort = function() {
     _asc = $("input:radio[name='sortOrder']:checked").val();
@@ -127,7 +171,7 @@ Final Project Daniel Simpkins and Nate Phillips
         }).attr('width', w).attr('height', h);
         b.exit().remove();
         b.on('click', function(d) {
-          return window.location = 'alertdetail.php?alert_id=' + d.alert_id;
+          return window.setDetails(d.alert_id);
         });
         a = list.selectAll('.ageleft').data(data, function(d) {
           return d.alert_id;
@@ -250,7 +294,7 @@ Final Project Daniel Simpkins and Nate Phillips
         }).attr('width', thinw).attr('height', thinh);
         b.exit().remove();
         b.on('click', function(d) {
-          return window.location = 'alertdetail.php?alert_id=' + d.alert_id;
+          return window.setDetails(d.alert_id);
         });
         a = list.selectAll('.ageleft').data(data, function(d) {
           return d.alert_id;

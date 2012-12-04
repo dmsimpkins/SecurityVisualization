@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <head>
     <title>Alert Details</title>
 	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
