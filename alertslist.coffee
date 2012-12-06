@@ -39,6 +39,11 @@ thinipmargin = 3
 
 colorMap = ['#2e99c4', '#9fc2e2', '#fdf9cd', '#fc93ba', '#d62028']
 
+$('#pageup').attr('disabled', 'disabled')
+$('#pageup50').attr('disabled', 'disabled')
+$('#pagedown').removeAttr('disabled')
+$('#pagedown50').removeAttr('disabled')
+
 #$('#sortOrder').click ->
 #  asc = $('#sortOrder').val()
 
@@ -108,6 +113,8 @@ window.toggleView = ->
   
 window.scrollUp50 = ->
   first -= count * 50
+  $('#pagedown').removeAttr('disabled')
+  $('#pagedown50').removeAttr('disabled')
   if first < 0
     first = 0
   if first == 0
@@ -117,6 +124,8 @@ window.scrollUp50 = ->
 
 window.scrollUp = ->
   first -= count
+  $('#pagedown').removeAttr('disabled')
+  $('#pagedown50').removeAttr('disabled')
   if first < 0
     first = 0
   if first == 0
@@ -128,12 +137,22 @@ window.scrollDown = ->
   first += count
   $('#pageup').removeAttr('disabled')
   $('#pageup50').removeAttr('disabled')
+  if first > 25743 - count
+    first = 25743 - count
+  if first == 25743 - count
+    $('#pagedown').attr('disabled', 'disabled')
+    $('#pagedown50').attr('disabled', 'disabled')  
   draw()
 
 window.scrollDown50 = ->
   first += count * 50
   $('#pageup').removeAttr('disabled')
   $('#pageup50').removeAttr('disabled')
+  if first > 25743 - count
+    first = 25743 - count
+  if first == 25743 - count
+    $('#pagedown').attr('disabled', 'disabled')
+    $('#pagedown50').attr('disabled', 'disabled')  
   draw()
 
 #list = d3.select('svg')
