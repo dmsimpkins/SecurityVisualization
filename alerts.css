@@ -1,13 +1,38 @@
 body{
 	font-family: "Helvetica-Neue",Helvetica,Arial,sans-serif;
-
+	text-align: center;
 }
 h1 {
+	position: relative;
+	text-align: center;
+}
+
+#leftFloater {
+	position: relative;
+	z-index: 120;
+}
+
+#leftWrapper {
+	position: relative;
 	text-align: left;
+	width: 100%;
+}
+
+#centerWrapper {
+	position: relative;
+	text-align: left;
+	width: 100%;
+}
+
+#rightWrapper {
+	position: relative;
+	text-align: left;
+	width: 100%;
+	z-index: 10;
 }
 
 p {
-	text-align: left;
+	text-align: center;
 }
 
 svg {
@@ -37,37 +62,23 @@ rect {
 	stroke: none;
 }
 
-.sidebar {
-         position: fixed;
-         height: 25px;
-         left: 3px;
-         top: 185px;
-         width: 24px;
-}
-
-#container {
-	width: 1100px;
-	margin: 0 0 0 20px;
-	padding: 0;
-}
-#container #leftFloater {
-	float:left;
-	width: 200px;
+#leftWrapper #leftFloater {
+	float: left;
+	padding: 2%;
+	z-index: 100;
 }
 
 #alerts{
-	width: 900px;
-	float: right;
-	margin: 0;
-	padding: 0;
+	position: relative;
+	float: left;
+	z-index: 100;
 }
 #alerts #alertsList{
-	width: 400px;
-	float: left;
+	
 }
-#alerts #alertDetails{
-	width: 300px;
-	float: right;
+#alertDetails{
+	text-align: center;
+	
 }
 
 #toggleview {

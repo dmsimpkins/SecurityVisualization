@@ -61,7 +61,6 @@ window.writeDetails = (alert) ->
   $('#detail').html(alert.details)
   $('#priority').html('Priority: ' + alert.priority)
     .css('background-color', priorityColors[alert.priority - 1])
-    .css('width', '200px')
   $('#datetime').html('Datetime: ' + alert.date_time)
 
   source = alert.src_ip
