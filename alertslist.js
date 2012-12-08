@@ -56,7 +56,15 @@ Final Project Daniel Simpkins and Nate Phillips
 
   colorMap = ['#2e99c4', '#9fc2e2', '#fdf9cd', '#fc93ba', '#d62028'];
 
-  priorityColors = ['#32CD32', '#84E184', '#C2F0C2'];
+  $('#pageup').attr('disabled', 'disabled');
+
+  $('#pageup50').attr('disabled', 'disabled');
+
+  $('#pagedown').removeAttr('disabled');
+
+  $('#pagedown50').removeAttr('disabled');
+
+  priorityColors = ['#de2d26', '#fc9272', '#fee0d2'];
 
   window.setDetails = function(alert_id) {
     return d3.json('query_alerts.php?alert_id=' + alert_id, function(json) {
@@ -115,6 +123,8 @@ Final Project Daniel Simpkins and Nate Phillips
 
   window.scrollUp50 = function() {
     first -= count * 50;
+    $('#pagedown').removeAttr('disabled');
+    $('#pagedown50').removeAttr('disabled');
     if (first < 0) {
       first = 0;
     }
@@ -127,6 +137,8 @@ Final Project Daniel Simpkins and Nate Phillips
 
   window.scrollUp = function() {
     first -= count;
+    $('#pagedown').removeAttr('disabled');
+    $('#pagedown50').removeAttr('disabled');
     if (first < 0) {
       first = 0;
     }
@@ -141,6 +153,13 @@ Final Project Daniel Simpkins and Nate Phillips
     first += count;
     $('#pageup').removeAttr('disabled');
     $('#pageup50').removeAttr('disabled');
+    if (first > 25743 - count) {
+      first = 25743 - count;
+    }
+    if (first === 25743 - count) {
+      $('#pagedown').attr('disabled', 'disabled');
+      $('#pagedown50').attr('disabled', 'disabled');
+    }
     return draw();
   };
 
@@ -148,6 +167,13 @@ Final Project Daniel Simpkins and Nate Phillips
     first += count * 50;
     $('#pageup').removeAttr('disabled');
     $('#pageup50').removeAttr('disabled');
+    if (first > 25743 - count) {
+      first = 25743 - count;
+    }
+    if (first === 25743 - count) {
+      $('#pagedown').attr('disabled', 'disabled');
+      $('#pagedown50').attr('disabled', 'disabled');
+    }
     return draw();
   };
 
@@ -170,7 +196,7 @@ Final Project Daniel Simpkins and Nate Phillips
           return i * h;
         }).attr('width', w).attr('height', h);
         b.exit().remove();
-        b.on('click', function(d) {
+        b.on('mouseover', function(d) {
           return window.setDetails(d.alert_id);
         });
         a = list.selectAll('.ageleft').data(data, function(d) {

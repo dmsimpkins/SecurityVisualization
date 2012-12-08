@@ -59,6 +59,5 @@
 	 
 	</div> <!--/container-->
 	<script type="text/javascript" src="alertslist.js"></script>
-	<script type="text/javascript" src="alertdetail.js"></script>
   </body>
 </html>

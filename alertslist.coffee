@@ -50,7 +50,7 @@ $('#pagedown50').removeAttr('disabled')
 #$('#sortByDrop').change ->
 #  sortBy = $('#sortByDrop').val()
 #colorMap = ["#2e99c4", "#9fc2e2", "#fdf9cd", "#fc93ba", "#d62028"]
-priorityColors = ['#32CD32', '#84E184', '#C2F0C2']
+priorityColors = ['#de2d26', '#fc9272', '#fee0d2']
 
 window.setDetails = (alert_id) ->
   d3.json('query_alerts.php?alert_id=' + alert_id, (json) ->
@@ -180,7 +180,7 @@ draw = ->
         .attr('width', w)
         .attr('height', h)
       b.exit().remove()
-      b.on('click', (d) ->
+      b.on('mouseover', (d) ->
         #window.location = 'alertdetail.php?alert_id=' + d.alert_id
         window.setDetails(d.alert_id)
       )
