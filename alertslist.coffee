@@ -37,7 +37,7 @@ thinsliderwidth = 3
 thinslidermargin = 2
 thinipmargin = 3
 
-colorMap = ['#2e99c4', '#9fc2e2', '#fdf9cd', '#fc93ba', '#d62028']
+colorMap = ['#8dd4f0', '#9fc2e2', '#fdf9cd', '#fc93ba', '#d62028']
 
 $('#pageup').attr('disabled', 'disabled')
 $('#pageup50').attr('disabled', 'disabled')

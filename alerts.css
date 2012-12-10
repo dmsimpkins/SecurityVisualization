@@ -70,6 +70,15 @@ rect {
 	float: right;
 }
 
+#alertsDetails p{
+	margin-bottom: 5px;
+}
+
 #toggleview {
 	margin-top:8px;
+}
+#footer {
+	position:absolute;
+	bottom: 5px;
+	right: 275px;
 }

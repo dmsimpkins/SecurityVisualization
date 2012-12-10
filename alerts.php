@@ -39,25 +39,29 @@
 	 	<div id="alertDetails">
     		<h1>Alert Details</h1>
 		<h3 id="detail">&lt;Detail&gt;</h3>
-		<p id="priority">Priority: X</p>
-		<p id="datetime">Datetime: XX-XX:XX</p>
+		<div id="priority">Priority: X</div>
+		<div id="datetime">Datetime: XX-XX:XX</div>
 		<br>
 		<h3>Source:</h3>
-		<p id="source">X.X.X.X:XXX (type) (service)</p>
-		<p id="source_count" style="font-size: 12px">Number of alerts: XXX</p>
+		<div id="source">X.X.X.X:XXX (type) (service)</div>
+		<div id="source_count" style="font-size: 12px">Number of alerts: XXX</div>
 		<br>
 		<h3>Destination:</h3>
-		<p id="destination">X.X.X.X:XXX (type) (service)</p>
-		<p id="destination_count" style="font-size: 12px">Number of alerts: XXX</p>
+		<div id="destination">X.X.X.X:XXX (type) (service)</div>
+		<div id="destination_count" style="font-size: 12px">Number of alerts: XXX</div>
 		<br>
-		<p id="extra">&lt;protocol&gt; TTL:XX ID:XX PacketSize:XX Flags:XXXXX Seq:XXXXX</p>
-		<p id="optional"></p>
+		<div id="extra">&lt;protocol&gt; TTL:XX ID:XX PacketSize:XX Flags:XXXXX Seq:XXXXX</div>
+		<div id="optional"></div>
 
-
+	
 	 	</div>
 	 </div> <!--/alerts-->
 	 
 	</div> <!--/container-->
+	<div id='footer'>
+                         <a href="edge_bundle/connections.html" target="_blank"> View Network Connection Map </a> 
+                        <br>Visualization by Nate Phillips and Daniel Simpkins <br>for CSE 8990 Information Visualization
+	</div>
 	<script type="text/javascript" src="alertslist.js"></script>
   </body>
 </html>
