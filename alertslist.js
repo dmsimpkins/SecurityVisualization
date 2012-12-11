@@ -319,7 +319,7 @@ Final Project Daniel Simpkins and Nate Phillips
           return i * thinh;
         }).attr('width', thinw).attr('height', thinh);
         b.exit().remove();
-        b.on('click', function(d) {
+        b.on('mouseover', function(d) {
           return window.setDetails(d.alert_id);
         });
         a = list.selectAll('.ageleft').data(data, function(d) {

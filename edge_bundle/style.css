@@ -1,10 +1,10 @@
 body {
-  font: 300 36px "Helvetica Neue";
-  height: 640px;
+  font: 300 36px "Helvetica Neue",Helvetica,sans-serif;
+  height: 1200px;
   margin: 80px 160px 80px 160px;
   overflow: hidden;
   position: relative;
-  width: 960px;
+  width: 1920px;
 }
 
 a:link, a:visited {
@@ -45,12 +45,12 @@ h1, h2, h3 {
   margin: 0;
 }
 
-h2, h3 {
-  text-align: right;
+h1,h2, h3 {
+  text-align: left;
   font-size: inherit;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 0;
+  left: 0;
 }
 
 h2 {
@@ -96,6 +96,6 @@ h3 {
 body > svg {
   position: absolute;
   top: -80px;
-  left: -160px;
+  left: -20px;
 }
 

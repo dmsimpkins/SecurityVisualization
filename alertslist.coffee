@@ -319,7 +319,7 @@ draw = ->
         .attr('width', thinw)
         .attr('height', thinh)
       b.exit().remove()
-      b.on('click', (d) ->
+      b.on('mouseover', (d) ->
         #window.location = 'alertdetail.php?alert_id=' + d.alert_id
         window.setDetails(d.alert_id)
       )

@@ -38,7 +38,7 @@
       // For each import, construct a link from the source to target node.
       nodes.forEach(function(d) {
         if (d.connect) d.connect.forEach(function(i) {
-          imports.push({source: map[d.name], target: map[i]});
+          imports.push({source: map[d.name], target: map[i.ip], num: i.count});
         });
       });
 
