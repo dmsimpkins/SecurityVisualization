@@ -49,6 +49,11 @@ path.arc {
   stroke: #2ca02c;
 }
 
+h1 {
+  top: -15px;
+	font-size: 60%;
+}
+
     </style>
   </head>
   <body>
@@ -68,6 +73,11 @@ var w = 1920,//1280,
     m0,
     rotate = 0;
 
+w = screen.width;
+h = screen.height;
+ry = (screen.height - 100) / 2;
+rx = screen.width / 2;
+
 var splines = [];
 
 var cluster = d3.layout.cluster()
@@ -84,8 +94,8 @@ var line = d3.svg.line.radial()
 
 // Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
 var div = d3.select("body").insert("div")
-    .style("top", "-80px")
-    .style("left", "-300px")
+    .style("top", "-10%")
+    .style("left", "-28%")
     .style("width", w + "px")
     .style("height", w + "px")
     .style("position", "absolute");
@@ -255,4 +265,3 @@ function dot(a, b) {
     </script>
   </body>
 </html>
-
